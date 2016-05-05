@@ -1,0 +1,4 @@
+c:\users\marius sørenes\documents\visual studio 2015\Projects\BibelUtvidelse\BibelUtvidelse\bin\Debug\BibelUtvidelse.dll
+c:\users\marius sørenes\documents\visual studio 2015\Projects\BibelUtvidelse\BibelUtvidelse\bin\Debug\BibelUtvidelse.pdb
+c:\users\marius sørenes\documents\visual studio 2015\Projects\BibelUtvidelse\BibelUtvidelse\obj\Debug\BibelUtvidelse.dll
+c:\users\marius sørenes\documents\visual studio 2015\Projects\BibelUtvidelse\BibelUtvidelse\obj\Debug\BibelUtvidelse.pdb
