@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{856556C5-8817-47D8-A5E0-18618F217E4D}</ProjectGuid>
+    <ProjectGuid>{4C20CA34-5BBD-4BB4-A273-44AE011A48B0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BibelUtvidelse</RootNamespace>
-    <AssemblyName>BibelUtvidelse</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>BibelUtvidelse.Test</RootNamespace>
+    <AssemblyName>BibelUtvidelse.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -30,6 +30,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Mono.Cecil, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit3TestAdapter.3.0.10\lib\Mono.Cecil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="nunit.engine, Version=3.0.5813.39036, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit3TestAdapter.3.0.10\lib\nunit.engine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="nunit.engine.api, Version=3.0.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit3TestAdapter.3.0.10\lib\nunit.engine.api.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.2.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.2.1\lib\net45\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NUnit3.TestAdapter, Version=3.0.10.0, Culture=neutral, PublicKeyToken=4cb40d35494691ac, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit3TestAdapter.3.0.10\lib\NUnit3.TestAdapter.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,10 +60,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Book.cs" />
+    <Compile Include="BookTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reference.cs" />
-    <Compile Include="ScriptureExtensions.cs" />
+    <Compile Include="ReferenceTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BibelUtvidelse\BibelUtvidelse.csproj">
+      <Project>{856556c5-8817-47d8-a5e0-18618f217e4d}</Project>
+      <Name>BibelUtvidelse</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

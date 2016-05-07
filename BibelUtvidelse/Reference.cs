@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -7,20 +8,147 @@ using System.Threading.Tasks;
 
 namespace BibelUtvidelse
 {
+    /// <summary>
+    /// This exstension was made by Berin Loritsch, im happy to be able to use it. 
+    /// Kurious Iesous 
+    /// </summary>
     public class Reference
     {
-        /// <summary>
-        /// This exstension was made by Berin Loritsch, im happy to be able to use it. 
-        /// Kurious Iesous 
-        /// </summary>
-
         private static readonly Regex RemoveHtml = new Regex("<[^>]*>", RegexOptions.Compiled);
 
         public Book Book { get; set; }
+
         public int Chapter { get; set; }
+
         public int[] Verses { get; set; }
 
+        public int CompareTo(Reference other)
+        {
+            int compare = Book.CompareTo(other.Book);
 
+            if (compare == 0)
+            {
+                compare = Chapter.CompareTo(other.Chapter);
+            }
+
+            if (compare == 0)
+            {
+                Verses = Verses.OrderBy(v => v).ToArray();
+                other.Verses = other.Verses.OrderBy(v => v).ToArray();
+
+                for (int i = 0; compare == 0 && i < Math.Max(Verses.Length, other.Verses.Length); i++)
+                {
+                    if (i < Verses.Length && i < other.Verses.Length)
+                    {
+                        compare = Verses[i].CompareTo(other.Verses[i]);
+                    }
+                    else
+                    {
+                        compare = Verses.Length - other.Verses.Length;
+                    }
+                }
+            }
+
+            return compare;
+        }
+
+        public override bool Equals(object obj)
+        {
+            Reference other = obj as Reference;
+
+            if (other != null)
+            {
+                bool versesEqual = Verses.Length == other.Verses.Length;
+                for (int i = 0; versesEqual && i < Verses.Length; i++)
+                {
+                    versesEqual = versesEqual && Verses[i] == other.Verses[i];
+                }
+
+                return Book == other.Book && Chapter == other.Chapter && versesEqual;
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked // Overflow is fine, just wrap
+            {
+                int hash = 17;
+
+                if (Book != null)
+                {
+                    hash = hash * 23 + Book.GetHashCode();
+                }
+
+                hash = hash * 23 + Chapter.GetHashCode();
+
+                if (Verses != null)
+                {
+                    foreach (int verse in Verses)
+                    {
+                        hash = hash * 23 + verse.GetHashCode();
+                    }
+                }
+
+                return hash;
+            }
+        }
+
+        public static ICollection<Reference> Scan(string text)
+        {
+            List<Reference> references = new List<Reference>();
+
+            if (text == null)
+            {
+                return references;
+            }
+
+            string[] words = RemoveHtml.Replace(text, "").Split(' ', '(', ')', ';', '\r', '\n', '\t');
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                string one = words[i];
+
+                // If we are starting with a blank entry, just skip this cycle
+                if (string.IsNullOrWhiteSpace(one))
+                {
+                    continue;
+                }
+
+                string two = i + 1 < words.Length ? string.Join(" ", one, words[i + 1]) : one;
+                string three = i + 2 < words.Length ? string.Join(" ", two, words[i + 2]) : two;
+
+                Book book;
+                bool match = Book.TryParse(one, out book);
+                match = match || Book.TryParse(two, out book);
+                match = match || Book.TryParse(three, out book);
+
+                if (match)
+                {
+                    string four = i + 3 < words.Length ? string.Join(" ", three, words[i + 3]) : three;
+                    string five = i + 4 < words.Length ? string.Join(" ", four, words[i + 4]) : four;
+
+                    // Keep the most inclusive version of the reference
+                    Reference found = null;
+                    foreach (string test in new[] { two, three, four, five })
+                    {
+                        Reference check;
+                        if (TryParse(test, out check))
+                        {
+                            found = check;
+                        }
+                    }
+
+                    if (found != null && !references.Contains(found))
+                    {
+                        references.Add(found);
+                    }
+                }
+            }
+
+            return references;
+        }
 
         public static bool TryParse(string text, out Reference reference)
         {
@@ -34,6 +162,19 @@ namespace BibelUtvidelse
             }
 
             return true;
+        }
+
+        public static Reference Parse(string text)
+        {
+            string errorString;
+            Reference reference = InternalParse(text, out errorString);
+
+            if (errorString != null)
+            {
+                throw new FormatException(errorString);
+            }
+
+            return reference;
         }
 
         private static Reference InternalParse(string text, out string errorString)
@@ -161,66 +302,107 @@ namespace BibelUtvidelse
             return numbers.ToArray();
         }
 
-        public ICollection<Reference> scantext(string text)
+        /// <summary>
+        /// Display this reference as a string, uses the Thompson Chain reference format.
+        /// </summary>
+        /// <returns>the formatted book</returns>
+        public override string ToString()
         {
-            return Scan(text);
-
+            return ToString("T", CultureInfo.CurrentCulture);
         }
 
-
-        public static ICollection<Reference> Scan(string text)
+        /// <summary>
+        /// Format the string with the current culture.
+        /// <see cref="ToString(string,IFormatProvider)"/>
+        /// </summary>
+        /// <param name="format">the format spec</param>
+        /// <returns>the formatted book</returns>
+        public string ToString(string format)
         {
-            List<Reference> references = new List<Reference>();
+            return ToString(format, CultureInfo.CurrentCulture);
+        }
 
-            if (text == null)
+        /// <summary>
+        /// Format the reference with one of the formats.  The default format is "T".
+        /// <list type="table">
+        /// <listheader>
+        ///   <term>Format</term>
+        ///   <description>Description</description>
+        /// </listheader>
+        /// <item>
+        ///   <term>T</term>
+        ///   <description>Use the Thompson Chain Reference format.  <example>1 Chr</example></description>
+        /// </item>
+        /// <item>
+        ///   <term>S</term>
+        ///   <description>Use the Standard Abbreviation format as defined in "The Christian Writer's Manual of Style" (2004).  <example>1 Chron.</example></description>
+        /// </item>
+        /// <item>
+        ///   <term>s</term>
+        ///   <description>Use the Standard Abbreviation format as defined in "The Christian Writer's Manual of Style" (2004), but with Roman numerals.  <example>I Chron.</example></description>
+        /// </item>
+        /// <item>
+        ///   <terms>N</terms>
+        ///   <description>Use the full book name.  <example>2 Chronicles</example></description>
+        /// </item>
+        /// <item>
+        ///   <terms>n</terms>
+        ///   <description>use the full book name, but with Roman numerals.  <example>II Chronicles</example></description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="format">the format spec</param>
+        /// <param name="formatProvider">the culture specific formatter (unused)</param>
+        /// <returns>the formatted string</returns>
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            StringBuilder builder = new StringBuilder(Book.ToString(format, formatProvider));
+
+            builder.Append(" ");
+
+            if (Book.ChapterCount > 1)
             {
-                return references;
+                builder.Append(Chapter);
+
+                if (Verses != null && Verses.Length > 0)
+                {
+                    builder.Append(":");
+                }
             }
 
-            string[] words = RemoveHtml.Replace(text, "").Split(' ', '(', ')', ';', '\r', '\n', '\t');
-
-            for (int i = 0; i < words.Length; i++)
+            if (Verses != null && Verses.Length > 0)
             {
-                string one = words[i];
+                bool firstTime = true;
 
-                // If we are starting with a blank entry, just skip this cycle
-                if (string.IsNullOrWhiteSpace(one))
+                for (int i = 0; i < Verses.Length; i++)
                 {
-                    continue;
-                }
-
-                string two = i + 1 < words.Length ? string.Join(" ", one, words[i + 1]) : one;
-                string three = i + 2 < words.Length ? string.Join(" ", two, words[i + 2]) : two;
-
-                Book book;
-                bool match = Book.TryParse(one, out book);
-                match = match || Book.TryParse(two, out book);
-                match = match || Book.TryParse(three, out book);
-
-                if (match)
-                {
-                    string four = i + 3 < words.Length ? string.Join(" ", three, words[i + 3]) : three;
-                    string five = i + 4 < words.Length ? string.Join(" ", four, words[i + 4]) : four;
-
-                    // Keep the most inclusive version of the reference
-                    Reference found = null;
-                    foreach (string test in new[] { two, three, four, five })
+                    if (firstTime)
                     {
-                        Reference check;
-                        if (TryParse(test, out check))
-                        {
-                            found = check;
-                        }
+                        firstTime = false;
+                    }
+                    else
+                    {
+                        builder.Append(",");
                     }
 
-                    if (found != null && !references.Contains(found))
+                    builder.Append(Verses[i]);
+                    bool doRange = false;
+
+                    while (i < Verses.Length - 1 && Verses[i + 1] == Verses[i] + 1)
                     {
-                        references.Add(found);
+                        i++;
+                        doRange = true;
+                    }
+
+                    if (doRange)
+                    {
+                        builder.Append("-").Append(Verses[i]);
                     }
                 }
             }
 
-            return references;
+            return builder.ToString();
         }
     }
 }
+

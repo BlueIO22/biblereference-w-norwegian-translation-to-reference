@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BibelUtvidelse
 {
+    /// <summary>
+    /// This exstension was made by Berin Loritsch, im happy to be able to use it. 
+    /// Kurious Iesous 
+    /// </summary>
     public class Book
     {
-
-        /// <summary>
-        /// This exstension was made by Berin Loritsch, im happy to be able to use it. 
-        /// Kurious Iesous 
-        /// </summary>
-
         // The set of books we recognize
         private static readonly List<Book> books;
         private static readonly Dictionary<string, Book> commonMisspellings;
@@ -27,7 +24,7 @@ namespace BibelUtvidelse
             new Book("1 Mosebok", "1 Mos.", "1 Mo", 50), // Gen
             new Book("2 Mosebok", "2 Mos.", "2 Mo", 40),  // Exod
             new Book("3 Mosebok", "3 Mos.", "3 Mo", 27), // Lev
-            new Book("4 Mosebok", "4 Mos.", "3 Mo", 36), // Num
+            new Book("4 Mosebok", "4 Mos.", "4 Mo", 36), // Num
             new Book("5 Mosebok", "5 Mos.", "5 Mo", 34), // Deut
             new Book("Josva", "Josv.", "Jos", 24), // Josh
             new Book("Dommerne", "Domr.", "Dom", 21), // Judg
@@ -109,6 +106,13 @@ namespace BibelUtvidelse
         private static int numCreated = 0;
         private int order;
 
+        /// <summary>
+        /// Create the book internally.
+        /// </summary>
+        /// <param name="fullName">the full book name</param>
+        /// <param name="abbrev">the standard abreviation</param>
+        /// <param name="thompsan">the Thompson abreviation</param>
+        /// <param name="chapters">the number of chapters in that book</param>
         private Book(string fullName, string abbrev, string thompsan, int chapters)
         {
             order = numCreated;
@@ -140,6 +144,150 @@ namespace BibelUtvidelse
         /// </summary>
         public int ChapterCount { get; private set; }
 
+        /// <summary>
+        /// Display this book as a string, uses the Thompson Chain reference format.
+        /// </summary>
+        /// <returns>the formatted book</returns>
+        public override string ToString()
+        {
+            return ToString("T", CultureInfo.CurrentCulture);
+        }
+
+        /// <summary>
+        /// Format the string with the current culture.
+        /// <see cref="ToString(string,IFormatProvider)"/>
+        /// </summary>
+        /// <param name="format">the format spec</param>
+        /// <returns>the formatted book</returns>
+        public string ToString(string format)
+        {
+            return ToString(format, CultureInfo.CurrentCulture);
+        }
+
+        /// <summary>
+        /// Format the book part of a reference with one of the formats.  The default format is "N".
+        /// <list type="table">
+        /// <listheader>
+        ///   <term>Format</term>
+        ///   <description>Description</description>
+        /// </listheader>
+        /// <item>
+        ///   <term>T</term>
+        ///   <description>Use the Thompson Chain Reference format.  <example>1 Chr</example></description>
+        /// </item>
+        /// <item>
+        ///   <term>S</term>
+        ///   <description>Use the Standard Abbreviation format as defined in "The Christian Writer's Manual of Style" (2004).  <example>1 Chron.</example></description>
+        /// </item>
+        /// <item>
+        ///   <term>s</term>
+        ///   <description>Use the Standard Abbreviation format as defined in "The Christian Writer's Manual of Style" (2004), but with Roman numerals.  <example>I Chron.</example></description>
+        /// </item>
+        /// <item>
+        ///   <terms>N</terms>
+        ///   <description>Use the full book name.  <example>2 Chronicles</example></description>
+        /// </item>
+        /// <item>
+        ///   <terms>n</terms>
+        ///   <description>use the full book name, but with Roman numerals.  <example>II Chronicles</example></description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="format">the format spec</param>
+        /// <param name="formatProvider">the culture specific formatter (unused)</param>
+        /// <returns>the formatted string</returns>
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            // Default to Thompsan references if none provided
+            format = format ?? "T";
+
+            switch (format)
+            {
+                case "T":
+                    return ThompsonAbreviation;
+
+                case "S":
+                    return StandardAbreviation;
+
+                case "s":
+                    return ToRomanNumeral(StandardAbreviation);
+
+                case "N":
+                    return Name;
+
+                case "n":
+                    return ToRomanNumeral(Name);
+            }
+
+            throw new FormatException(string.Format("The {0} format string is not supported.", format));
+        }
+
+        /// <summary>
+        /// Format the number part of the books that have more than one part as
+        /// a Roman numeral rather than the Arabic numeral
+        /// </summary>
+        /// <param name="book">the book to reformat</param>
+        /// <returns></returns>
+        private string ToRomanNumeral(string book)
+        {
+            string[] parts = book.Split(' ');
+
+            // We only have to convert the first part of the book to a roman numeral
+            // And the highest we go is 3 (3 Jn).
+            switch (parts[0])
+            {
+                case "1":
+                    parts[0] = "I";
+                    break;
+
+                case "2":
+                    parts[0] = "II";
+                    break;
+
+                case "3":
+                    parts[0] = "III";
+                    break;
+            }
+
+            return string.Join(" ", parts);
+        }
+
+        /// <summary>
+        /// Provides a mechanism to sort books by the order in the Bible.
+        /// Relies on the fact that all the books used in the system are
+        /// defined statically.
+        /// </summary>
+        /// <param name="other">the other book to compare</param>
+        /// <returns>0 if equal or greater or less than depending on order</returns>
+        public int CompareTo(Book other)
+        {
+            return order.CompareTo(other.order);
+        }
+
+        /// <summary>
+        /// Parses the string and returns a book instance if it matches.
+        /// </summary>
+        /// <exception cref="FormatException">If the book format could not be recognized</exception>
+        /// <param name="str">the string to parse</param>
+        /// <returns>a book</returns>
+        public static Book Parse(string str)
+        {
+            Book book;
+            if (TryParse(str, out book))
+            {
+                return book;
+            }
+
+            throw new FormatException(string.Format("Could not recognize the book {0}", str));
+        }
+
+        /// <summary>
+        /// Tries to parse the string into a Book.  If it can't it will return false instead
+        /// of throwing an exception.
+        /// </summary>
+        /// <param name="inString">The string to parse</param>
+        /// <param name="book">the book that was found (or null)</param>
+        /// <returns>true if found, false if not</returns>
         public static bool TryParse(string inString, out Book book)
         {
             string potentialBook = StandardizeBookOrdinals(inString);
@@ -209,6 +357,10 @@ namespace BibelUtvidelse
             return string.Join(" ", parts);
         }
 
+        /// <summary>
+        /// Return a list of all books in the Bible.
+        /// </summary>
+        /// <returns>a list of all the books, in order</returns>
         public static IEnumerable<Book> List()
         {
             return books.ToArray();
