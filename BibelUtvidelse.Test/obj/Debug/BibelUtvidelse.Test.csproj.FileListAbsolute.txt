@@ -1,0 +1,10 @@
+C:\Users\mar_s\Source\Repos\biblereference-w-norwegian-translation-to-reference\BibelUtvidelse.Test\bin\Debug\BibelUtvidelse.Test.dll
+C:\Users\mar_s\Source\Repos\biblereference-w-norwegian-translation-to-reference\BibelUtvidelse.Test\bin\Debug\BibelUtvidelse.Test.pdb
+C:\Users\mar_s\Source\Repos\biblereference-w-norwegian-translation-to-reference\BibelUtvidelse.Test\bin\Debug\BibelUtvidelse.dll
+C:\Users\mar_s\Source\Repos\biblereference-w-norwegian-translation-to-reference\BibelUtvidelse.Test\bin\Debug\nunit.framework.dll
+C:\Users\mar_s\Source\Repos\biblereference-w-norwegian-translation-to-reference\BibelUtvidelse.Test\bin\Debug\BibelUtvidelse.pdb
+C:\Users\mar_s\Source\Repos\biblereference-w-norwegian-translation-to-reference\BibelUtvidelse.Test\bin\Debug\nunit.framework.xml
+C:\Users\mar_s\Source\Repos\biblereference-w-norwegian-translation-to-reference\BibelUtvidelse.Test\obj\Debug\BibelUtvidelse.Test.csprojResolveAssemblyReference.cache
+C:\Users\mar_s\Source\Repos\biblereference-w-norwegian-translation-to-reference\BibelUtvidelse.Test\obj\Debug\BibelUtvidelse.Test.csproj.CoreCompileInputs.cache
+C:\Users\mar_s\Source\Repos\biblereference-w-norwegian-translation-to-reference\BibelUtvidelse.Test\obj\Debug\BibelUtvidelse.Test.dll
+C:\Users\mar_s\Source\Repos\biblereference-w-norwegian-translation-to-reference\BibelUtvidelse.Test\obj\Debug\BibelUtvidelse.Test.pdb

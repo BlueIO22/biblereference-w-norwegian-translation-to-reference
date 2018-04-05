@@ -1,0 +1,6 @@
+C:\Users\mar_s\Source\Repos\biblereference-w-norwegian-translation-to-reference\BibelUtvidelse\bin\Debug\BibelUtvidelse.dll
+C:\Users\mar_s\Source\Repos\biblereference-w-norwegian-translation-to-reference\BibelUtvidelse\bin\Debug\BibelUtvidelse.pdb
+C:\Users\mar_s\Source\Repos\biblereference-w-norwegian-translation-to-reference\BibelUtvidelse\obj\Debug\BibelUtvidelse.csprojResolveAssemblyReference.cache
+C:\Users\mar_s\Source\Repos\biblereference-w-norwegian-translation-to-reference\BibelUtvidelse\obj\Debug\BibelUtvidelse.csproj.CoreCompileInputs.cache
+C:\Users\mar_s\Source\Repos\biblereference-w-norwegian-translation-to-reference\BibelUtvidelse\obj\Debug\BibelUtvidelse.dll
+C:\Users\mar_s\Source\Repos\biblereference-w-norwegian-translation-to-reference\BibelUtvidelse\obj\Debug\BibelUtvidelse.pdb
