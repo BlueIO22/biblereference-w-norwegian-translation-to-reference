@@ -127,7 +127,7 @@ namespace BibelUtvidelse.Test
         public void ParseChapterRangeNotSupported()
         {
             string text = "2 Kor. 5-7";
-
+             
             Assert.Throws<FormatException>(() => Reference.Parse(text));
         }
 

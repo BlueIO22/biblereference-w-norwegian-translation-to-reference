@@ -21,74 +21,74 @@ namespace BibelUtvidelse
             // Initialize the set
             books = new List<Book>{
             // Old Testament
-            new Book("1 Mosebok", "1 Mos.", "1 Mo", 50), // Gen
-            new Book("2 Mosebok", "2 Mos.", "2 Mo", 40),  // Exod
-            new Book("3 Mosebok", "3 Mos.", "3 Mo", 27), // Lev
-            new Book("4 Mosebok", "4 Mos.", "4 Mo", 36), // Num
-            new Book("5 Mosebok", "5 Mos.", "5 Mo", 34), // Deut
-            new Book("Josva", "Josv.", "Jos", 24), // Josh
-            new Book("Dommerne", "Domr.", "Dom", 21), // Judg
-            new Book("Ruts", "Rut", "Ru.", 4), // Ruth
-            new Book("1 Samuel", "1 Sam.", "1 S", 31), // 1Sam
-            new Book("2 Samuel", "2 Sam.", "2 S", 24), // 2Sam
-            new Book("1 Kongebok", "1 Konge.", "1 K", 22), // 1Kgs
-            new Book("2 Kongebok", "2 Konge.", "2 K", 25), // 2Kgs
-            new Book("1 Krønikebok", "1 Krøn.", "1 Krø", 29), // 1Chr
-            new Book("2 Krønikebok", "2 Krøn.", "2 Krø", 36), // 2Chr
-            new Book("Esra", "Esra.", "Esr", 10), // Ezra
-            new Book("Nehemja", "Neh.", "Ne", 13), // Neh
-            new Book("Ester", "Est.", "Est", 10), // Esth
-            new Book("Job", "Job", "Jb", 42), // Job
-            new Book("Salmene", "Sal.", "Sl", 150), // Ps
-            new Book("Ordspråkene", "Ordsp.", "Or", 31), // Prov
-            new Book("Forkynneren", "Fork.", "Fk", 12), // Eccl
-            new Book("Høysangen", "Høys.", "Høys", 8), // Song
-            new Book("Jesaia", "Jes.", "Js", 66), // Isa
-            new Book("Jeremia", "Jer.", "Je", 52), // Jer
-            new Book("Klagesangene", "Klag.", "Kla", 5), // Lam
-            new Book("Esekiel", "Esek.", "Es", 48), // Ezek
-            new Book("Daniel", "Dan.", "Da", 12), // Dan
-            new Book("Hosea", "Hos.", "Ho", 14), // Hos
-            new Book("Joel", "Joel", "Joel", 3), // Joel
-            new Book("Amos", "Amos", "Am", 9), // Amos
-            new Book("Obdaja", "Ob.", "Ob", 1), // Obad
-            new Book("Jona", "Jona", "Jona", 4), // Jonah
-            new Book("Mika", "Mik.", "Mi", 7), // Mic
-            new Book("Nahum", "Nah.", "Na", 3), // Nah
-            new Book("Habakkuk", "Hab.", "Hab", 3), // Hab
-            new Book("Sefanja", "Sef.", "Sef", 3), // Zeph
-            new Book("Haggai", "Hag.", "Hag", 2), // Hag
-            new Book("Sakarja", "Sak.", "Zec", 14), // Zech
-            new Book("Malaki", "Mal.", "Mal", 4), // Mal
+            new Book("1 Mosebok", "Gen", "1 Mos.", 50, true), // Gen
+            new Book("2 Mosebok", "Exod", "2 Mos.", 40, true),  // Exod
+            new Book("3 Mosebok", "Lev", "3 Mos.", 27, true), // Lev
+            new Book("4 Mosebok", "Num", "4 Mos.", 36, true), // Num
+            new Book("5 Mosebok", "Deut", "5 Mos.", 34, true), // Deut
+            new Book("Josva", "Josh", "Josv.", 24, true), // Josh
+            new Book("Dommerne", "Judg", "Domr.", 21, true), // Judg
+            new Book("Ruts", "Ruth", "Rut.", 4, true), // Ruth
+            new Book("1 Samuel", "1Sam", "1 Sam.", 31, true), // 1Sam
+            new Book("2 Samuel", "2Sam", "2 Sam.", 24, true), // 2Sam
+            new Book("1 Kongebok", "1Kgs", "1 Konge.", 22, true), // 1Kgs
+            new Book("2 Kongebok", "2Kgs", "2 Konge.", 25, true), // 2Kgs
+            new Book("1 Krønikebok", "1Chr", "1 Krøn.", 29, true), // 1Chr
+            new Book("2 Krønikebok", "2Chr", "2 Krøn.", 36, true), // 2Chr
+            new Book("Esra", "Ezra", "Esra.", 10, true), // Ezra
+            new Book("Nehemja", "Neh", "Neh.", 13, true), // Neh
+            new Book("Ester", "Esth", "Est.", 10, true), // Esth
+            new Book("Job", "Job", "Job.", 42, true), // Job
+            new Book("Salmene", "Ps", "Sal.", 150, true), // Ps
+            new Book("Ordspråkene", "Prov.", "Ordsp.", 31, true), // Prov
+            new Book("Forkynneren", "Eccl.", "Fork.", 12, true), // Eccl
+            new Book("Høysangen", "Song", "Høys.", 8, true), // Song
+            new Book("Jesaia", "Isa", "Jes.", 66, true), // Isa
+            new Book("Jeremia", "Jer", "Jer.", 52, true), // Jer
+            new Book("Klagesangene", "Lam.", "Klag.", 5, true), // Lam
+            new Book("Esekiel", "Ezek", "Esek.", 48, true), // Ezek
+            new Book("Daniel", "Dan", "Dan.", 12, true), // Dan
+            new Book("Hosea", "Hos", "Hos.", 14, true), // Hos
+            new Book("Joel", "Joel", "Joel.", 3, true), // Joel
+            new Book("Amos", "Amos", "Amos.", 9, true), // Amos
+            new Book("Obdaja", "Obad", "Obad.", 1, true), // Obad
+            new Book("Jona", "Jonah", "Jona.", 4, true), // Jonah
+            new Book("Mika", "Mic", "Mik.", 7, true), // Mic
+            new Book("Nahum", "Nah", "Nah.", 3, true), // Nah
+            new Book("Habakkuk", "Hab", "Hab.", 3, true), // Hab
+            new Book("Sefanja", "Zeph", "Sef.", 3, true), // Zeph
+            new Book("Haggai", "Hag", "Hag.", 2, true), // Hag
+            new Book("Sakarja", "Zech", "Sak.", 14, true), // Zech
+            new Book("Malaki", "Mal", "Mal.", 4, true), // Mal
 
             // New Testament
-            new Book("Matteus", "Matt.", "Mt", 28), // Matt
-            new Book("Markus", "Mark.", "Mk", 16), // Mark
-            new Book("Lukas", "Luke.", "Lu", 24), // Luke
-            new Book("Johannes", "Joh.", "Jn", 21), // John
-            new Book("Apostelgjerningene", "Apg.", "Apg", 28), // Acts
-            new Book("Romerene", "Rom.", "Ro", 16), // Rom
-            new Book("1 Korinterene", "1 Kor.", "1 Kor", 16), // 1Cor
-            new Book("2 Korinterene", "2 Kor.", "2 Kor", 13), // 2Cor
-            new Book("Galaterne", "Gal.", "Ga", 6), // Gal
-            new Book("Efeserene", "Efe.", "Ef", 6), // Eph
-            new Book("Filipperne", "Fil.", "Fi", 4), // Phil
-            new Book("Kolosserne", "Kol.", "Col", 4), // Col
-            new Book("1 Tessalonikerne", "1 Tess.", "1 Te", 5), // 1Thess
-            new Book("2 Tessalonikerne", "2 Tess.", "2 Te", 3), // 2Thess
-            new Book("1 Timoteus", "1 Tim.", "1 Ti", 6), // 1Tim
-            new Book("2 Timoteus", "2 Tim.", "2 Ti", 4), // 2Tim
-            new Book("Titus", "Titus.", "Tit", 3), // Titus
-            new Book("Filemon", "Filem.", "File", 1), // Phlm
-            new Book("Hebreerne", "Heb.", "He", 13), // Heb
-            new Book("Jakob", "Jakob.", "Ja", 5), // Jas
-            new Book("1 Peter", "1 Peter.", "1 Pe", 5), // 1Pet
-            new Book("2 Peter", "2 Peter.", "2 Pe", 3), // 2Pet
-            new Book("1 Johannes", "1 Joh.", "1 Jn", 5), // 1John
-            new Book("2 Johannes", "2 Joh.", "2 Jn", 1), // 2John
-            new Book("3 Johannes", "3 Joh.", "3 Jn", 1), // 3John
-            new Book("Judas", "Judas", "Judas", 1), // Jude
-            new Book("Åpenbaringen", "Åp.", "Åp", 22) // Rev
+            new Book("Matteus", "Matt", "Matt.", 28, false), // Matt
+            new Book("Markus", "Mark", "Mark.", 16, false), // Mark
+            new Book("Lukas", "Luke", "Luk.", 24, false), // Luke
+            new Book("Johannes", "John", "Joh.", 21, false), // John
+            new Book("Apostelgjerningene", "Acts", "Apg.", 28, false), // Acts
+            new Book("Romerene", "Rom", "Rom.", 16, false), // Rom
+            new Book("1 Korinterene", "1Cor", "1 Kor.", 16, false), // 1Cor
+            new Book("2 Korinterene", "2Cor", "2 Kor.", 13, false), // 2Cor
+            new Book("Galaterne", "Gal", "Gal.", 6, false), // Gal
+            new Book("Efeserene", "Eph", "Efes.", 6, false), // Eph
+            new Book("Filipperne", "Phil", "Fil.", 4, false), // Phil
+            new Book("Kolosserne", "Col", "Kol.", 4, false), // Col
+            new Book("1 Tessalonikerne", "1Thess", "1 Tess.", 5, false), // 1Thess
+            new Book("2 Tessalonikerne", "2Thess", "2 Tess.", 3, false), // 2Thess
+            new Book("1 Timoteus", "1Tim", "1 Tim.", 6, false), // 1Tim
+            new Book("2 Timoteus", "2Tim", "2 Tim.", 4, false), // 2Tim
+            new Book("Titus", "Titus", "Titus.", 3, false), // Titus
+            new Book("Filemon", "Phlm.", "File.", 1, false), // Phlm
+            new Book("Hebreerne", "Heb", "Heb.", 13, false), // Heb
+            new Book("Jakob", "Jas", "Jak.", 5, false), // Jas
+            new Book("1 Peter", "1Pet", "1 Pet.", 5, false), // 1Pet
+            new Book("2 Peter", "2Pet", "2 Pet.", 3, false), // 2Pet
+            new Book("1 Johannes", "1John", "1 Joh.", 5, false), // 1John
+            new Book("2 Johannes", "2John", "2 Joh.", 1, false), // 2John
+            new Book("3 Johannes", "3John", "3 Joh.", 1, false), // 3John
+            new Book("Judas", "Jude", "Judas.", 1, false), // Jude
+            new Book("Åpenbaringen", "Rev", "Åp.", 22, false) // Rev
         };
 
             Debug.Assert(books.Count == 66);
@@ -113,13 +113,14 @@ namespace BibelUtvidelse
         /// <param name="abbrev">the standard abreviation</param>
         /// <param name="thompsan">the Thompson abreviation</param>
         /// <param name="chapters">the number of chapters in that book</param>
-        private Book(string fullName, string abbrev, string thompsan, int chapters)
+        private Book(string fullName, string abbrev, string thompsan, int chapters, bool old)
         {
             order = numCreated;
             Name = fullName;
             StandardAbreviation = abbrev;
             ThompsonAbreviation = thompsan;
             ChapterCount = chapters;
+            OldTestament = old;
             numCreated++;
         }
 
@@ -138,6 +139,11 @@ namespace BibelUtvidelse
         /// Thompson Chain references, pulled from the 5th edition.
         /// </summary>
         public string ThompsonAbreviation { get; private set; }
+
+        /// <summary>
+        /// Is the book in the Old testament?
+        /// </summary>
+        public bool OldTestament { get; private set; }
 
         /// <summary>
         /// The number of chapters in the book.

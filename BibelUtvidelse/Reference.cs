@@ -95,6 +95,11 @@ namespace BibelUtvidelse
             }
         }
 
+        public ICollection<Reference> ScanText(string text)
+        {
+            return Scan(text);
+        }
+
         public static ICollection<Reference> Scan(string text)
         {
             List<Reference> references = new List<Reference>();
@@ -149,7 +154,7 @@ namespace BibelUtvidelse
 
             return references;
         }
-
+    
         public static bool TryParse(string text, out Reference reference)
         {
             string errorString;
@@ -163,6 +168,10 @@ namespace BibelUtvidelse
 
             return true;
         }
+
+        
+
+        
 
         public static Reference Parse(string text)
         {
